@@ -1,8 +1,13 @@
-import {Body, Controller, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Get, Param, Post, SetMetadata, UseGuards} from '@nestjs/common';
 import {UsersService} from "./users.service";
-import {AddUserDto} from "./add-user.dto";
+import {UserDto} from "./user.dto";
+import {AuthGuard} from "@nestjs/passport";
+import {RolesGuard} from "../guards/roles.guard";
+import {Roles} from "../decorators/roles.decorator";
+
 
 @Controller('users')
+@UseGuards(AuthGuard('jwt'))
 export class UsersController {
 
     constructor(private readonly usersService: UsersService) {
@@ -12,6 +17,8 @@ export class UsersController {
      * Get All users
      */
     @Get()
+    @UseGuards(RolesGuard)
+    @Roles('admin')
     getAllUsers() {
         return this.usersService.findAll();
     }
@@ -39,7 +46,7 @@ export class UsersController {
      * @param addUserDto
      */
     @Post()
-    async create(@Body() addUserDto: AddUserDto) {
+    async create(@Body() addUserDto: UserDto) {
         const userId = await this.usersService.addUser(addUserDto);
         return {id: userId.identifiers[0].id, username: addUserDto.username};
     }

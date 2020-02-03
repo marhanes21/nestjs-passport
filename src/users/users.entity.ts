@@ -10,4 +10,8 @@ export class Users {
 
     @Column('text')
     password: string;
+
+    @Column('text', {nullable: true})
+    role: string;
+
 }

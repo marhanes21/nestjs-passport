@@ -2,7 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {InjectRepository} from "@nestjs/typeorm";
 import {Users} from "./users.entity";
 import {Repository} from "typeorm";
-import {AddUserDto} from "./add-user.dto";
+import {UserDto} from "./user.dto";
 
 @Injectable()
 export class UsersService {
@@ -38,7 +38,7 @@ export class UsersService {
      * Add new user
      * @param addUserDto
      */
-    addUser(addUserDto: AddUserDto) {
+    addUser(addUserDto: UserDto) {
         return this.usersRepository.insert(addUserDto);
     }
 }
