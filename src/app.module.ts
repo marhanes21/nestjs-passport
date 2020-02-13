@@ -7,11 +7,13 @@ import {AuthModule} from './auth/auth.module';
 import {JwtStrategy} from "./auth/jwt.strategy";
 import {LocalStrategy} from "./auth/local.strategy";
 import {PassportModule} from "@nestjs/passport";
+import {RolesModule} from "./users/roles.module";
 
 @Module({
     imports: [
         TypeOrmModule.forRoot(),
         UsersModule,
+        RolesModule,
         AuthModule,
         PassportModule
     ],

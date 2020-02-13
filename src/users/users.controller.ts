@@ -17,8 +17,6 @@ export class UsersController {
      * Get All users
      */
     @Get()
-    @UseGuards(RolesGuard)
-    @Roles('admin')
     getAllUsers() {
         return this.usersService.findAll();
     }
@@ -46,6 +44,8 @@ export class UsersController {
      * @param addUserDto
      */
     @Post()
+    @UseGuards(RolesGuard)
+    @Roles('admin')
     async create(@Body() addUserDto: UserDto) {
         const userId = await this.usersService.addUser(addUserDto);
         return {id: userId.identifiers[0].id, username: addUserDto.username};
