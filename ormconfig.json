@@ -3,7 +3,7 @@
   "host": "localhost",
   "port": 5432,
   "username": "postgres",
-  "password": "",
+  "password": "test123",
   "database": "nestjs",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true
